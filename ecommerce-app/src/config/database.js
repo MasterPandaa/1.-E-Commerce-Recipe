@@ -1,5 +1,5 @@
-require('dotenv').config();
-const mysql = require('mysql2/promise');
+require('dotenv').config()
+const mysql = require('mysql2/promise')
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
@@ -10,28 +10,28 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || 'ecommerce_db',
   waitForConnections: true,
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10', 10),
-  queueLimit: 0,
-});
+  queueLimit: 0
+})
 
 // Eagerly attempt a connection to surface configuration issues early
 pool
   .getConnection()
   .then((conn) => {
-    conn.release();
+    conn.release()
   })
   .catch((err) => {
-    console.error('MySQL pool connection error:', err.message);
-  });
+    console.error('MySQL pool connection error:', err.message)
+  })
 
 // Simple helper to test connection with a trivial query
-async function testConnection() {
-  const conn = await pool.getConnection();
+async function testConnection () {
+  const conn = await pool.getConnection()
   try {
-    const [rows] = await conn.query('SELECT 1 AS result');
-    return rows && rows[0] && rows[0].result === 1;
+    const [rows] = await conn.query('SELECT 1 AS result')
+    return rows && rows[0] && rows[0].result === 1
   } finally {
-    conn.release();
+    conn.release()
   }
 }
 
-module.exports = { pool, testConnection };
+module.exports = { pool, testConnection }
