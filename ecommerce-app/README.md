@@ -10,4 +10,5 @@ This is a production-ready e-commerce backend following a layered architecture: 
 4. Run in dev: `npm run dev`.
 
 ## Project Structure
+
 See `src/` for code layout. Uploads are stored under `uploads/products/`.
